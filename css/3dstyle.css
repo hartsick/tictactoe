@@ -1,0 +1,76 @@
+body{
+	font-family: sans-serif;
+	font-size: 30px;
+}
+
+.wrap {
+	-webkit-perspective: 800px;
+	-webkit-perspective-origin: 50% 100px;
+	margin: 100px 0 0 200px;
+}
+
+.cube {
+	position: relative;
+	width: 600px;
+	-webkit-transform-style: preserve-3d;
+}
+
+.face {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	-webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+}
+
+.face div {
+	width: 96px;
+	height: 96px;
+	border: 2px solid black;
+	float: left;
+	font-size: 80px;
+	font-family: sans-serif;
+	text-align: center;
+}
+
+.back {
+	-webkit-transform: translateZ(-150px) rotateY(180deg);
+}
+.right {
+	-webkit-transform: rotateY(-270deg) translateX(150px);
+	-webkit-transform-origin: top right;
+}
+.left {
+	-webkit-transform: rotateY(270deg) translateX(-150px);
+	-webkit-transform-origin: center left;
+}
+.top {
+	-webkit-transform: rotateX(-90deg) translateY(-150px);
+	-webkit-transform-origin: top center;
+}
+.bottom {
+	-webkit-transform: rotateX(90deg) translateY(150px);
+	-webkit-transform-origin: bottom center;
+}
+.front {
+	-webkit-transform: translateZ(150px);
+}
+
+#scores {
+	padding-top: 400px;
+}
+
+#controls {
+	position: absolute;
+	top: 10px;
+}
+
+#controls div {
+	height: 50px;
+	width: 50px;
+	margin: 5px;
+	float: left;
+	color: white;
+	background: black;
+	font-size: 14px;
+	text-align: center;
+}

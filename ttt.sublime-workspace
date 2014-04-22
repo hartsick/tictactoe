@@ -1,0 +1,633 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"current",
+				"currentPlayer"
+			],
+			[
+				"c",
+				"currentPlayer"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"player",
+				"player1"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"text-",
+				"text-transform"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"padding",
+				"padding"
+			],
+			[
+				"win",
+				"winheight"
+			],
+			[
+				"font-",
+				"font-style"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"pad",
+				"padding-left"
+			],
+			[
+				"paddi",
+				"padding-top"
+			],
+			[
+				"birthday",
+				"birthday_this_year"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"fonts",
+				"font-size"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"else",
+				"elseif	elseif …"
+			],
+			[
+				"rgb",
+				"rgba()"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"vis",
+				"visibility"
+			],
+			[
+				"ili",
+				"inline-block"
+			],
+			[
+				"fot",
+				"font-size"
+			],
+			[
+				"bord",
+				"border-bottom"
+			],
+			[
+				"border",
+				"border"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"f",
+				"font-style"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"mari",
+				"margin-bottom"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"similar",
+				"similar_project"
+			],
+			[
+				"top",
+				"margin-top"
+			],
+			[
+				"margin-",
+				"margin-bottom"
+			],
+			[
+				"padding-",
+				"padding-right"
+			],
+			[
+				"ali",
+				"text-align"
+			],
+			[
+				"simi",
+				"similar_to_display"
+			],
+			[
+				"posts",
+				"posts_per_page"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"simila",
+				"similar_posts"
+			],
+			[
+				"if",
+				"ifelse	if … else …"
+			],
+			[
+				"projec",
+				"project_type"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"min-",
+				"min-width"
+			],
+			[
+				"a1",
+				"a1_canvas"
+			],
+			[
+				"get",
+				"getContext"
+			],
+			[
+				"getElem",
+				"getElementbyId"
+			],
+			[
+				"fill",
+				"fillRect"
+			],
+			[
+				"color",
+				"background-color"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"in",
+				"inline-block"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 347.0,
+		"selected_items":
+		[
+			[
+				"package",
+				"Preferences: Package Control Settings – User"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 51.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"python import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/Christa/Documents/_GA/project_1/3djs.html",
+		"/Users/Christa/Documents/_GA/project_1/js/3dscript.js",
+		"/Users/Christa/Documents/_GA/project_1/js/script.js",
+		"/Users/Christa/Documents/_GA/project_1/ttt.html",
+		"/Users/Christa/Documents/_GA/project_1/css/style.css",
+		"/Users/Christa/Documents/_GA/02-week/quiz2.html",
+		"/Users/Christa/Documents/_GA/notes/140415_angular-mvc.txt",
+		"/Users/Christa/Documents/_GA/notes/140417_angular-pt3.txt",
+		"/Users/Christa/Documents/_GA/notes/_shortcuts.txt",
+		"/Users/Christa/Documents/_GA/notes/140416_angular-pt2.txt",
+		"/Users/Christa/Documents/_GA/notes/140414_javascript-ii.txt",
+		"/Users/Christa/Documents/_GA/project_1/tic-tac-toe_strategy-notes.txt",
+		"/Users/Christa/Documents/_GA/notes/140416_angular-pt2",
+		"/Users/Christa/Documents/_GA/notes/140410_javascript.txt",
+		"/Users/Christa/Documents/_GA/notes/140413_javascript-codeschool.txt",
+		"/Users/Christa/Documents/_GA/notes/140414_github.txt",
+		"/Users/Christa/Documents/_GA/notes/140413_github.txt",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/about.html",
+		"/Users/Christa/Documents/_GA/notes/140411_javascript2.txt",
+		"/Users/Christa/Documents/_GA/notes/140411_wireframing.txt",
+		"/Users/Christa/Documents/_GA/notes/wdi-notes.sublime-project",
+		"/Users/Christa/Documents/_GA/notes/wdi-notes.sublime-workspace",
+		"/Users/Christa/Documents/_GA/repos/WDI_LA_5-6/01-week/js-objects/script.js",
+		"/Users/Christa/Documents/_GA/repos/WDI_LA_5-6/01-week/js-objects/jedi.html",
+		"/Users/Christa/Documents/_GA/repos/WDI_LA_5-6/01-week/js-objects/style.css",
+		"/Users/Christa/Documents/_GA/repos/WDI_LA_5-6/01-week/js-objects/readme.md",
+		"/Users/Christa/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/Users/Christa/Library/Application Support/Sublime Text 3/Packages/User/Plain text.sublime-settings",
+		"/Users/Christa/Documents/_GA/quiz.html",
+		"/Applications/MAMP/htdocs/the_mission/wp-content/themes/the-mission_theme/header.php",
+		"/Applications/MAMP/htdocs/the_mission/wp-content/themes/the-mission_theme/style.css",
+		"/Applications/MAMP/htdocs/the_mission/wp-content/themes/the-mission_theme/js/parallax.js",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/footer.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/js/photos.js",
+		"/Users/Christa/Documents/Web Projects/_GA/notes_week1/140407_intro.txt",
+		"/Users/Christa/Documents/Web Projects/_GA/notes_week0/140403_arrays_sym_hash",
+		"/Users/Christa/Documents/Web Projects/_GA/notes_week0/140403 .txt",
+		"/Users/Christa/Documents/Web Projects/_GA/notes_week0/140331 pseudocode.txt",
+		"/Users/Christa/Documents/Web Projects/_GA/ruby_basics/number_guesser.rb",
+		"/Users/Christa/Documents/Web Projects/_GA/ruby_basics/guess.rb",
+		"/Users/Christa/Documents/Web Projects/_GA/ruby_basics/barkeeper.rb",
+		"/Users/Christa/Documents/Web Projects/_GA/ruby_basics/helloworld.rb",
+		"/Users/Christa/Documents/Web Projects/_GA/ruby_basics/hellworld.rb",
+		"/Users/Christa/Documents/Web Projects/_GA/ruby_basics/helloworld.r",
+		"/Users/Christa/index.html",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/page-reels-new.php",
+		"/Users/Christa/temp/neat.txt",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/photos.js",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/page-photo-new.php",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/header.php",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/gallery.js",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/index.php",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/wp-config.php",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/.htaccess.orig",
+		"/private/var/folders/_c/chy_g6wj4qz1705z2qh31c440000gn/T/fz3temp-1/.htaccess",
+		"/Users/Christa/Documents/Web Projects/_GA/notes_week0/140401 pseudocode.txt",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/js/gallery.js",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/page-reels-new.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/style.css",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/page-photo.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/page-photo-new.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/front-page.php",
+		"/Applications/MAMP/htdocs/the_mission/wp-content/themes/the-mission_theme/front-page.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/header.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/page-reels.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/functions.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/front-page-v1.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/front-page-v2.php",
+		"/Users/Christa/Documents/Web Projects/_GA/hartsock_pre-assign/css/style.css",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/page-about.php",
+		"/Users/Christa/Documents/Web Projects/_GA/pre-assign/index_old.html",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/page-reels-php.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/index.php",
+		"/Applications/MAMP/htdocs/chloe_lenihan/wp-content/themes/01 chloe site/page-contact.php",
+		"/Users/Christa/Documents/Web Projects/_GA/pre-assign/css/script.js",
+		"/Users/Christa/Documents/Web Projects/_GA/pre-assign/content.php",
+		"/Users/Christa/Documents/Web Projects/site_the mission entertainment/code/live mockups/jumbotron-offcanvas.html",
+		"/Users/Christa/Documents/Web Projects/site_the mission entertainment/code/live mockups/css/missiontest.css",
+		"/Users/Christa/Documents/Web Projects/site_the mission entertainment/code/live mockups/js/offcanvas.js",
+		"/Users/Christa/Documents/Web Projects/site_the mission entertainment/code/live mockups/css:offcanvas.css",
+		"/Users/Christa/Documents/Web Projects/site_the mission entertainment/site mockups/try_one.html",
+		"/Users/Christa/Documents/Web Projects/site_chloe lenihan/test/index.html",
+		"/Applications/MAMP/htdocs/The Mission/wp-config.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/script.js",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/functions.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/page.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/page-about.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/style.css",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/archive-ch_projects.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/404.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/single-projects.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/single-project_types.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/single_project_types.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/header.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/single-ch_project.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/archive-ch_project.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/category-projects.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/home.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/contact.html",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/front-page.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/index.php",
+		"/Applications/MAMP/htdocs/site/wp-content/themes/wp1-chartsock-theme/footer.php",
+		"/Applications/MAMP/htdocs/site/wp-content/plugins/background-manager/background-manager.php",
+		"/Applications/MAMP/htdocs/site/wp-content/plugins/background-manager/index.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/pageofposts.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/page.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/header.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/page-about.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/style.css",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/category.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/page-text.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/index.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/home.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/front-page.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/footer.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/functions.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/header.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/index.html",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/wp1-chartsock-theme/index.html",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/css/style.css",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/index.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/css/front-page.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/footer.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/js/script.js",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/css/header.php",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/css/sketchystyle.css",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/css/sketchystyle.css",
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/index.html"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"array",
+			"300",
+			"200px",
+			"literal",
+			"reels",
+			"max-width",
+			"entry",
+			"posts",
+			"gallery",
+			"thumb",
+			"textbox",
+			"padding-bottom",
+			"submit",
+			"padding-bottom",
+			".sidebar",
+			"nav",
+			"buffer",
+			"fixed-to",
+			"laurels",
+			"#masthead",
+			"em",
+			"font-spacing",
+			"h2",
+			"thumbnail",
+			"@media",
+			"left",
+			"content",
+			"#main-content p",
+			"#content p",
+			"click",
+			"content",
+			"main-content",
+			"sidebar",
+			"17px",
+			"content",
+			"h3",
+			"content",
+			"main",
+			"header-text",
+			"header",
+			"form",
+			"img",
+			"text-header",
+			"contact",
+			"form",
+			"console.",
+			"thumbnail",
+			"src",
+			"photo",
+			"reel",
+			"reels",
+			"background-color",
+			"max-width:",
+			"img",
+			"footer",
+			"z-index",
+			"max-width: 1000",
+			"body",
+			"max-width",
+			"twitt",
+			"twitter",
+			"background",
+			"main-content",
+			"page-section",
+			"#copyright",
+			"reels-nav-container",
+			"z-index",
+			"#masthead h2",
+			"galleryi",
+			"div#reels-nav",
+			"reels-nav-container",
+			"reels-navcontainer",
+			"laurels-container",
+			"current-reel",
+			"main-content",
+			"reels-nav-container",
+			"hr",
+			"margin-bottom",
+			"sidebar",
+			"post_parent",
+			"import_wp_object",
+			"get_posts",
+			"style",
+			"h2",
+			"entry-content",
+			"textheader",
+			"text-header",
+			"entry-content",
+			"var rgb"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "ttt.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"page-reels.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 117.0,
+	"status_bar_visible": false,
+	"template_settings":
+	{
+	}
+}

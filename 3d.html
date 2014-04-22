@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html x-ng-app="">
+	<head>
+		<title>3D Experiments!</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+		<script src="js/3dapp.js"></script>
+		<link href="css/3dstyle.css" rel="stylesheet" />
+	</head>
+	<body x-ng-controller="TTTController">
+		<div id="controls">
+			<div x-ng-repeat="c in controls" id="control-{{c}}" x-ng-click="rotateCube(c);">
+				{{c}}
+			</div>
+		</div>
+		<!-- Cube wrapper -->
+		<div class="wrap">
+			<div class="cube">
+				<!-- Render cube faces -->
+				<div class="face {{c.face}}" x-ng-repeat="c in cube">
+						<div x-ng-repeat="b in c.board track by $index" id="{{c.face}}{{$index}}" x-ng-click="clicker(c.face, $index, $event);">{{b}}</div>
+			</div>
+		</div>
+		<!-- begin scores -->
+		<div id="scores">
+			<p x-ng-repeat="player in players">{{player.name}}: {{player.wins}}</p>
+		</div><!-- end scores -->
+	</body>
+</html>
