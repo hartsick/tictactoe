@@ -25,45 +25,45 @@ function TTTController($scope){
 	var currentPlayer = $scope.players[playerIndex];
 
 	// // instantiate cube faces
-	// $scope.cube = [
-	// 	{
-	// 		face: "front",
-	// 		board: new Array(9)
-	// 	},
-	// 	{
-	// 		face: "back",
-	// 		board: new Array(9)
-	// 	},
-	// 	{
-	// 		face: "top",
-	// 		board: new Array(9)
-	// 	},
-	// 	{
-	// 		face: "bottom",
-	// 		board: new Array(9)
-	// 	},
-	// 	{
-	// 		face: "left",
-	// 		board: new Array(9)
-	// 	},
-	// 	{
-	// 		face: "right",
-	// 		board: new Array(9)
-	// 	}
-	// ];
-
-	$scope.cubeFaces = ["front", "back", "top", "bottom", "left", "right"];
-	$scope.cube = function(){
-		var cubeArray;
-		for (var i = 0; i < 6; i++){
-			cubeArray[i] = {
-				face: cubeFaces[i],
-				board: new Array(9)
-			}
+	$scope.cube = [
+		{
+			face: "front",
+			board: new Array(9)
+		},
+		{
+			face: "back",
+			board: new Array(9)
+		},
+		{
+			face: "top",
+			board: new Array(9)
+		},
+		{
+			face: "bottom",
+			board: new Array(9)
+		},
+		{
+			face: "left",
+			board: new Array(9)
+		},
+		{
+			face: "right",
+			board: new Array(9)
 		}
-		console.log(cubeArray);
-		return cubeArray;
-	};
+	];
+
+	// $scope.cubeFaces = ["front", "back", "top", "bottom", "left", "right"];
+	// $scope.cube = function(){
+	// 	var cubeArray;
+	// 	for (var i = 0; i < 6; i++){
+	// 		cubeArray[i] = {
+	// 			face: cubeFaces[i],
+	// 			board: new Array(9)
+	// 		}
+	// 	}
+	// 	console.log(cubeArray);
+	// 	return cubeArray;
+	// };
 
 	/* 
 	 * Place marker in specified div
