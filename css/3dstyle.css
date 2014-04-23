@@ -3,13 +3,16 @@ body{
 	font-size: 30px;
 }
 
-.wrap {
-	-webkit-perspective: 800px;
+#cube-wrap {
+	-webkit-perspective: 1200px;
 	-webkit-perspective-origin: 50% 100px;
-	margin: 100px 0 0 200px;
+	margin: 150px 0 0 200px;
+
+	-webkit-transition: transform 2s; /* For Safari 3.1 to 6.0 */
+	transition: transform 2s;
 }
 
-.cube {
+#cube {
 	position: relative;
 	width: 600px;
 	-webkit-transform-style: preserve-3d;
@@ -19,6 +22,7 @@ body{
 	position: absolute;
 	width: 300px;
 	height: 300px;
+	background-color: rgba(0,0,0,.2);
 	-webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
 }
 
@@ -32,26 +36,27 @@ body{
 	text-align: center;
 }
 
-.back {
+.face-1 /* back */{
 	-webkit-transform: translateZ(-150px) rotateY(180deg);
 }
-.right {
+.face-5 /* right */{
 	-webkit-transform: rotateY(-270deg) translateX(150px);
 	-webkit-transform-origin: top right;
 }
-.left {
+.face-4 /* left */{
 	-webkit-transform: rotateY(270deg) translateX(-150px);
 	-webkit-transform-origin: center left;
 }
-.top {
+.face-2 /* top */{
 	-webkit-transform: rotateX(-90deg) translateY(-150px);
 	-webkit-transform-origin: top center;
 }
-.bottom {
+.face-3 /* bottom */{
 	-webkit-transform: rotateX(90deg) translateY(150px);
 	-webkit-transform-origin: bottom center;
 }
-.front {
+
+.face-0 /* front */{
 	-webkit-transform: translateZ(150px);
 }
 
@@ -62,6 +67,7 @@ body{
 #controls {
 	position: absolute;
 	top: 10px;
+	z-index: 100;
 }
 
 #controls div {
@@ -73,4 +79,11 @@ body{
 	background: black;
 	font-size: 14px;
 	text-align: center;
+}
+
+.little {
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	color: lime;
 }

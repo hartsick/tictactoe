@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"che",
+				"checkForWin"
+			],
+			[
+				"cube",
+				"cubeWrap"
+			],
+			[
+				"cont",
+				"controlName"
+			],
+			[
+				"pro",
+				"properties"
+			],
+			[
+				"p",
+				"properties"
+			],
+			[
+				"curre",
+				"currentCell"
+			],
+			[
+				"curr",
+				"currentCell"
+			],
+			[
+				"baord",
+				"boardWidth"
+			],
+			[
+				"board",
+				"boardWidth"
+			],
+			[
 				"current",
 				"currentPlayer"
 			],
@@ -243,6 +279,38 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "css/3dstyle.css",
+			"settings":
+			{
+				"buffer_size": 1397,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "3d.html",
+			"settings":
+			{
+				"buffer_size": 953,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/3dapp.js",
+			"settings":
+			{
+				"buffer_size": 8145,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/3dscript.js",
+			"settings":
+			{
+				"buffer_size": 4033,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -289,6 +357,9 @@
 	},
 	"file_history":
 	[
+		"/Users/Christa/Documents/_GA/project_1/tictactoe/ttt.html",
+		"/Users/Christa/Documents/_GA/project_1/tictactoe/3djs.html",
+		"/Users/Christa/Documents/_GA/project_1/tictactoe/css/3djs.html",
 		"/Users/Christa/Documents/_GA/project_1/3djs.html",
 		"/Users/Christa/Documents/_GA/project_1/js/3dscript.js",
 		"/Users/Christa/Documents/_GA/project_1/js/script.js",
@@ -413,14 +484,11 @@
 		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/css/front-page.php",
 		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/footer.php",
 		"/Users/Christa/Documents/Web Projects/_chartsock.com/js/script.js",
-		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/css/header.php",
-		"/Users/Christa/Documents/Web Projects/_chartsock.com/css/sketchystyle.css",
-		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/css/sketchystyle.css",
-		"/Users/Christa/Documents/Web Projects/_chartsock.com/index.html"
+		"/Users/Christa/Documents/Web Projects/_chartsock.com/wp/css/header.php"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -434,6 +502,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"boardTotal",
+			"gameEnd",
+			"boardTotal",
+			"hasPlayerWon",
+			"gameEnd",
+			"boardHeight",
+			"-t",
+			"console.log",
 			"array",
 			"300",
 			"200px",
@@ -540,8 +616,131 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "css/3dstyle.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1397,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								147,
+								147
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "3d.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 953,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								488,
+								488
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "js/3dapp.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8145,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8135,
+								8135
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4572.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/3dscript.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4033,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3924,
+								2983
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 826.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -562,11 +761,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.434846759841,
 			1.0
 		],
 		"rows":
