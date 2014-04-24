@@ -35,18 +35,11 @@ function TTTController($scope){
 	var totalMoves = 0;
 	var gameEnd = false;
 
-	// instantiate display cube faces & initial 3d properties
-	var buildDisplayCube = function(){
-		var cubeFaces = [];
-		for (var i = 0; i < 6; i++){
-			cubeFaces[i] = new Array(9);
-		}
-		return cubeFaces;
-	}
-	$scope.cube = buildDisplayCube();
-
-
-	// create underlying data structure
+	/*
+	 *
+	 * Create Cube
+	 *
+	 */ 
 	var createDataCube = function(){
 		// create data cube array
 		var innerCube = [];
@@ -64,54 +57,6 @@ function TTTController($scope){
 	};
 	$scope.dataCube = createDataCube();
 
-	// // bind data cube and display cube
-	// var bindCubes = function(){
-
-	// 	// iterate through data cube
-	// 	var displayCubeIndex = 0;
-
-	// 	for (var i = 0; i < 1 ; i++){
-	// 		// compute & store equivalent index for display cube
-	// 		var displayCellIndex = 0;
-	// 		for (var j = 0; j < boardWidth; j++){
-	// 			// set front equal to data cube
-	// 			for (var k = 0; k < boardWidth; k++){
-	// 				$scope.cube[displayCubeIndex][displayCellIndex] = dataCube[i][j][k];
-	// 				console.log(i,j,k, displayCubeIndex, displayCellIndex);
-	// 				displayCellIndex++;
-	// 			}
-	// 		}
-	// 	}
-	// };
-	// bindCubes(dataCube, $scope.cube);
-
-	// TEST BINDING
-	$scope.dataCube[0][0][2] = 5;
-	// $scope.cube[0][2] = $scope.dataCube[0][0][2];
-	// $scope.cube[5][0] = $scope.dataCube[0][0][2];
-
-	//$scope.cube[0][2] = $scope.players[0].character;
-	$scope.dataCube[0][0][2] = "X";
-	console.log($scope.dataCube[0][0][2]);
-
-
-	/* 
-	 *
-	 * Place marker in specified div
-	 *
-	 */
-	$scope.placeMarker = function(faceIndex, cellIndex, clickEvent){
-		// place current player's value in clicked cell
-		$scope.cube[faceIndex][cellIndex] = currentPlayer.character;
-		console.log($scope.cube[faceIndex][cellIndex]);
-		console.log(faceIndex, cellIndex);
-		
-		// change background
-		event.target.style.backgroundImage = currentPlayer.img;
-
-		// increment total moves
-		$scope.totalMoves++;
-	};
 
 
 	/*
@@ -139,15 +84,18 @@ function TTTController($scope){
 	 * Click handler for cube
 	 *
 	 */
-	$scope.clicker = function(faceIndex, cellIndex, clickEvent) {
-		console.log("Cell Index:" + faceIndex + " " + cellIndex);
-
+	$scope.clicker = function(x, y, z, clickEvent) {
+		console.log("x: " + x + " y: " + y + " z: " + z);
 		// If clicked cell is onoccupied, take a turn
-		if ($scope.cube[faceIndex][cellIndex] == undefined){
+		if ($scope.dataCube[x][y][z] == undefined){
 
-			// if cell is empty, place marker & switch player
-			$scope.placeMarker(faceIndex, cellIndex, clickEvent);
-			console.log("Current cube: " + $scope.cube);
+		// if cell is empty, place marker & switch player
+		$scope.dataCube[x][y][z] = currentPlayer.character;
+		// clickEvent.target.style.backgroundImage = currentPlayer.img;
+
+		// increment total moves
+		$scope.totalMoves++;
+
 			console.log("Data cube: " + $scope.dataCube);
 			$scope.switchPlayer();
 			$scope.checkForWin();
@@ -328,36 +276,6 @@ function TTTController($scope){
 		// 		return false;
 		// 	}
 		};		
-
-		// Defining corners and edges
-		// [face, index]
-		var cornerCases = [
-			[[0,5],[5,3]],
-			[[0,1],[2,7]],
-			[[0,3],[4,5]],
-			[[0,7],[3,1]],
-			[[1,1],[3,7]],
-			[[1,3],[4,3]],
-			[[1,5],[5,5]],
-			[[1,7],[2,1]],
-			[[3,3],[4,7]],
-			[[3,5],[2,3]],
-			[[4,1],[2,3]],
-			[[5,1],[2,5]],
-			[[0,0],[4,2],[2,6]],
-			[[0,2],[5,0],[2,8]],
-			[[0,6],[4,8],[3,0]],
-			[[0,8],[5,6],[3,2]],
-			[[1,0],[3,6],[4,6]],
-			[[1,2],[3,8],[5,8]],
-			[[1,6],[4,0],[2,0]],
-			[[1,8],[5,2],[2,2]]
-		];
-
-		// check current cell against edges & corners
-		for (var i = 0; i < cornerCases.length; i++){
-			// convert current face to num & grab index
-		}
 };
 
 

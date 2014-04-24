@@ -16,45 +16,67 @@
 		<!-- Cube wrapper -->
 		<div id="cube-wrap">
 			<div id="cube">
-<!-- 					<div class="face face-0">
-						<div x-ng-repeat="y in [0,1,2]">
-							<div x-ng-repeat="x in [0,1,2] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(0, ($parent.$index * 3) + $index, $event);">
-							<span class="little">{{$parent.$index}}:{{$index}}</span>
+					<!-- front -->
+					<div class="face face-2">
+						<div x-ng-repeat="x in [0,1,2]">
+							<div x-ng-repeat="y in [0,1,2] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(x, y, 0, $event);">
+							<!-- <span class="little">{{$parent.$index}}:{{$index}}</span> -->
 							{{dataCube[x][y][0]}}
 							</div>
 						</div>
 					</div>
-					<div class="face face-1">
-						<div x-ng-repeat="y in [0,1,2]">
-							<div x-ng-repeat="x in [2,1,0] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(1, ($parent.$index * 3) + $index, $event);">
-							<span class="little">{{$parent.$index}}:{{$index}}</span>
+					<!-- back -->
+					<div class="face face-3">
+						<div x-ng-repeat="x in [2,1,0]">
+							<div x-ng-repeat="y in [0,1,2] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(x,y,2, $event);">
+							<!-- <span class="little">{{$parent.$index}}:{{$index}}</span> -->
 							{{dataCube[x][y][2]}}
 							</div>
 						</div>
 					</div>
-					<div class="face face-5">
-						<div x-ng-repeat="y in [0,1,2]">
-							<div x-ng-repeat="z in [0,1,2] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(5, ($parent.$index * 3) + $index, $event);">
-							<span class="little">{{$parent.$index}}:{{$index}}</span>
+					<!-- right -->
+					<div class="face face-1">
+						<div x-ng-repeat="z in [0,1,2]">
+							<div x-ng-repeat="y in [0,1,2] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(2,y,z, $event);">
+							<!-- <span class="little">{{$parent.$index}}:{{$index}}</span> -->
 							{{dataCube[2][y][z]}}
 							</div>
 						</div>
 					</div>
-					<div class="face face-4">
-						<div x-ng-repeat="y in [0,1,2]">
-							<div x-ng-repeat="z in [2,1,0] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(4, ($parent.$index * 3) + $index, $event);">
-							<span class="little">{{$parent.$index}}:{{$index}}</span>
-							{{dataCube[2][y][z]}}
+					<!-- left -->
+					<div class="face face-0">
+						<div x-ng-repeat="z in [2,1,0]">
+							<div x-ng-repeat="y in [0,1,2] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(0,y,z, $event);">
+							<!-- <span class="little">{{$parent.$index}}:{{$index}}</span> -->
+							{{dataCube[0][y][z]}}
 							</div>
 						</div>
-					</div> -->
+					</div>
+					<!-- top -->
+					<div class="face face-4">
+						<div x-ng-repeat="x in [0,1,2]">
+							<div x-ng-repeat="z in [0,1,2] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(x,0,z, $event);">
+							<!-- <span class="little">{{$parent.$index}}:{{$index}}</span> -->
+							{{dataCube[x][0][z]}}
+							</div>
+						</div>
+					</div>
+					<!-- bottom-->
+					<div class="face face-5">
+						<div x-ng-repeat="x in [0,1,2]">
+							<div x-ng-repeat="z in [2,1,0] track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker(x,2,z, $event);">
+							<!-- <span class="little">{{$parent.$index}}:{{$index}}</span> -->
+							{{dataCube[x][2][z]}}
+							</div>
+						</div>
+					</div>
 
 				<!-- Render cube faces -->
-				<div class="face face-{{$index}}" x-ng-repeat="c in cube">
+<!-- 				<div class="face face-{{$index}}" x-ng-repeat="c in cube">
 						<div x-ng-repeat="b in c track by $index" id="{{$parent.$index}}{{$index}}" x-ng-click="clicker($parent.$index, $index, $event);">
 						<span class="little">{{$parent.$index}}:{{$index}}</span>
 						{{b}}
-						</div>
+						</div> -->
 			</div>
 		</div>
 		<!-- Score Tally -->

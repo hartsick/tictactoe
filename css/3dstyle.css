@@ -36,28 +36,34 @@ body{
 	text-align: center;
 }
 
-.face-1 /* back */{
+.face-3 /* back */{
 	-webkit-transform: translateZ(-150px) rotateY(180deg);
+/*	background: blue;*/
 }
-.face-5 /* right */{
+.face-1 /* right*/{
 	-webkit-transform: rotateY(-270deg) translateX(150px);
 	-webkit-transform-origin: top right;
+/*	background: green;*/
 }
-.face-4 /* left */{
+.face-0 /* left */{
 	-webkit-transform: rotateY(270deg) translateX(-150px);
 	-webkit-transform-origin: center left;
+/*	background: yellow;*/
 }
-.face-2 /* top */{
+.face-4 /* top */{
 	-webkit-transform: rotateX(-90deg) translateY(-150px);
 	-webkit-transform-origin: top center;
+/*	background: orange;*/
 }
-.face-3 /* bottom */{
+.face-5 /* bottom */{
 	-webkit-transform: rotateX(90deg) translateY(150px);
 	-webkit-transform-origin: bottom center;
+/*	background: red;*/
 }
 
-.face-0 /* front */{
+.face-2 /* front */{
 	-webkit-transform: translateZ(150px);
+/*	background: purple;*/
 }
 
 #scores {
@@ -71,7 +77,7 @@ body{
 }
 
 #controls div {
-	height: 50px;
+	height: 20px;
 	width: 50px;
 	margin: 5px;
 	float: left;
