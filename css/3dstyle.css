@@ -22,11 +22,11 @@ body{
 	position: absolute;
 	width: 300px;
 	height: 300px;
-	background-color: rgba(0,0,0,.2);
+	background-color: rgba(255,255,255,.8);
 	-webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
 }
 
-.face div {
+.face div, .face div div {
 	width: 96px;
 	height: 96px;
 	border: 2px solid black;
@@ -93,3 +93,9 @@ body{
 	padding: 0;
 	color: lime;
 }
+
+dl {
+	float: left;
+	padding: 10px 30px 10px 10px;
+}
+

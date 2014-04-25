@@ -1,6 +1,6 @@
 function TTTController($scope){
 
-	// instantiate players
+	// Instantiate players
 	$scope.players = [
 		{
 			name: "Player 1",
@@ -8,7 +8,8 @@ function TTTController($scope){
 			value: 1,
 			wins: 0,
 			color: 'rgba(0,0,200, .5)',
-			img: 'url("img/glitchbow.png")'
+			img: 'url("img/glitchbow.png")',
+			facesWon: 0
 		},
 		{
 			name: "Player 2",
@@ -16,24 +17,26 @@ function TTTController($scope){
 			value: -1,
 			wins: 0,
 			color: 'rgba(200,0,0,.5)',
-			img: 'url("img/glitchpoke.png")'
+			img: 'url("img/glitchpoke.png")',
+			facesWon: 0
 		}
 	];
-	
-	// set default number of players
-	numPlayers = 2;
 
-	// initialize current player
+	// Set Defaults
+	var numPlayers = 2;
+
+	// Initialize current player
 	var playerIndex = 0;
 	var currentPlayer = $scope.players[playerIndex];
 
-	// set board width for each face
+	// Set board width for each face
 	var boardWidth = 3;
 	var boardTotal = boardWidth * boardWidth;
 
-	// initialize moves
+	// Initialize moves
 	var totalMoves = 0;
 	var gameEnd = false;
+	var completedFaces = 0;
 
 	/*
 	 *
@@ -44,74 +47,25 @@ function TTTController($scope){
 		// create data cube array
 		var innerCube = [];
 
-		// create multi-dimensional array to store in main array
+		// Create multi-dimensional array to store in main array
 		for (var i = 0; i < boardWidth; i++){
 			var innerArray = [];
 			for (var j = 0; j < boardWidth; j++){
 				innerArray[j] = new Array(3);
 			}
-			// store inner array in main array at given index
+			// Store inner array in main array at given index
 			innerCube[i] = innerArray;
 		}	
 		return innerCube;
 	};
 	$scope.dataCube = createDataCube();
 
-
-
-	/*
-	 *
-	 * Switch current player
-	 * Allows for more than 2 players
-	 *
-	 */
-	$scope.switchPlayer = function(){
-		// increment player index
-		playerIndex++;
-
-		// if index is greater than the number of players, bring it back around
-		if (playerIndex > numPlayers - 1){
-			playerIndex = 0;
-		}
-
-		// update current player
-		currentPlayer = $scope.players[playerIndex];
-	};
-
-
-	/*
-	 *
-	 * Click handler for cube
-	 *
-	 */
-	$scope.clicker = function(x, y, z, clickEvent) {
-		console.log("x: " + x + " y: " + y + " z: " + z);
-		// If clicked cell is onoccupied, take a turn
-		if ($scope.dataCube[x][y][z] == undefined){
-
-		// if cell is empty, place marker & switch player
-		$scope.dataCube[x][y][z] = currentPlayer.character;
-		// clickEvent.target.style.backgroundImage = currentPlayer.img;
-
-		// increment total moves
-		$scope.totalMoves++;
-
-			console.log("Data cube: " + $scope.dataCube);
-			$scope.switchPlayer();
-			$scope.checkForWin();
-		}
-		else{
-			alert("Pick an unoccupied cell!");
-		}
-	};
-
-
-	/*
+  /*
 	 *
 	 * Rotate the cube
 	 *
 	 */
-	// initialize controls
+	// Initialize controls
 	$scope.controls = [
 		{
 			direction: "up",
@@ -127,7 +81,7 @@ function TTTController($scope){
 		}
 	];
 
-	// initialize rotation increments
+	// Initialize rotation increments
 	$scope.currentXdeg = 0;
 	$scope.currentYdeg = 0;
 	$scope.currentXtrans = 0;
@@ -137,12 +91,10 @@ function TTTController($scope){
 	// Rotate that cube!
 	$scope.rotateCube = function(controlName){
 
-		console.log("Control: " + controlName);
-
-		// snag the cube wrapper
+		// Snag the cube wrapper
 		var cubeWrap = document.getElementById('cube');
 
-		// increment current degree rotation based on command
+		// Increment current degree rotation based on selected command
 		if (controlName == "right"){
 			$scope.currentYdeg += 90;
 		}
@@ -156,8 +108,12 @@ function TTTController($scope){
 			$scope.currentXdeg -= 90;
 		}
 
+		// Checking current x & y degrees
+		console.log("Control: " + controlName);
 		console.log($scope.currentYdeg);
 		console.log($scope.currentXdeg);
+
+		// Compile the css tranformations & display
 		var transform = "rotateX("  + $scope.currentXdeg + "deg) ";
 				transform += "rotateY(" + $scope.currentYdeg + "deg) ";
 				transform += "translateX(" + $scope.currentXtrans + "px) ";
@@ -166,15 +122,51 @@ function TTTController($scope){
 		console.log(transform);
 		cubeWrap.style.webkitTransform = transform;
 
-		// // iterate through each cube face
-		// for (var i = 0; i < $scope.cube.length; i++){
-		// 	console.log("Before :" + $scope.cube[i].properties);
+	};
 
-		// 	if (controlName == "up"){
-		// 		$scope.controls[0]
-		// 	}
+	/*
+	 *
+	 * Click handler for cube
+	 *
+	 */
+	$scope.clicker = function(x, y, z, clickEvent) {
+		console.log("x: " + x + " y: " + y + " z: " + z);
+		// If clicked cell is onoccupied, take a turn
+		if ($scope.dataCube[x][y][z] == undefined){
 
-		// }
+			// If cell is empty, place marker & switch player
+			$scope.dataCube[x][y][z] = currentPlayer.character;
+			//clickEvent.target.style.backgroundImage = currentPlayer.img;
+
+			// Increment total moves
+			totalMoves++;
+
+			console.log("Data cube: " + $scope.dataCube);
+			$scope.checkForWin(x,y,z);
+			$scope.switchPlayer();
+		}
+		else{
+			alert("Pick an unoccupied cell!");
+		}
+	};
+
+	/*
+	 *
+	 * Switch current player
+	 * Allows for more than 2 players
+	 *
+	 */
+	$scope.switchPlayer = function(){
+		// Increment player index
+		playerIndex++;
+
+		// If index is greater than the number of players, bring it back around
+		if (playerIndex > numPlayers - 1){
+			playerIndex = 0;
+		}
+
+		// Update current player
+		currentPlayer = $scope.players[playerIndex];
 	};
 
 
@@ -183,99 +175,185 @@ function TTTController($scope){
 	 * Check for Win
 	 * 
 	 */
-	$scope.checkForWin = function() {
-		console.log("I'm checkin'!");
-		return;
-		// if ($scope.totalMoves > ($scope.boardWidth * 2) - 2){
+	$scope.checkForWin = function(x,y,z) {
+		console.log(totalMoves);
 
-		// 	// declare winCondition
-		// 	var winCondition;
+		// If total moves is enough to win, check for win!
+		if (totalMoves > (numPlayers * 3) - 2){
 
-		// 	// CHECK ROWS
-		// 	// iterate through rows
-		// 	for (var row = 0; row < $scope.boardWidth; row++){
-		// 		winCondition = 0;
+			// Create empty winCondition
+			var winCondition;
 
-		// 		// check each div of row
-		// 		for (var index = row * $scope.boardWidth; index < (row + 1) * $scope.boardWidth; index++){
-		// 			gameEnd = $scope.hasPlayerWon(index);
-		// 			console.log("Checking row: " + row);
-		// 		}
-		// 	}
+			// Check X for col/row wins
+			winCondition = 0;
+			for (var xCounter = 0; xCounter < boardWidth; xCounter++){
+				// If cube has a value, add it to winCondition total
+				if ($scope.dataCube[xCounter][y][z]){
+					winCondition += $scope.dataCube[xCounter][y][z].charCodeAt(0);
+				}
+				playerHasWon(winCondition);
+			}
 
-		// 	// CHECK COLUMNS
-		// 	// iterate through columns
-		// 	for (var row = 0; row < $scope.boardWidth; row++){
-		// 		// reset win condition
-		// 		winCondition = 0;
-		// 		// iterate through each div in column
-		// 		for (var index = row; index < boardTotal; index = index + $scope.boardWidth){
-		// 			gameEnd = $scope.hasPlayerWon(index);
-		// 		}
-		// 	}
+			// Check Y for col/row wins
+			winCondition = 0;
+			for (var yCounter = 0; yCounter < boardWidth; yCounter++){
+				// If cube has a value, add it to winCondition total
+				if ($scope.dataCube[x][yCounter][z]){
+					winCondition += $scope.dataCube[x][yCounter][z].charCodeAt(0);
+				}
+				playerHasWon(winCondition);
+			}
 
-		// 	// CHECK DIAGONALS
-			
-		// 	// iterate through left-facing diagonal
-		// 	for (var row = 0; row < $scope.boardWidth; row++){
-		// 		// reset win condition
-		// 		winCondition = 0;
-		// 		for (var index = 0; index < boardTotal; index = index + ($scope.boardWidth + 1) ){
-		// 			gameEnd = $scope.hasPlayerWon(index);
-		// 			if (gameEnd){
-		// 				break;
-		// 			}
-		// 		}
-		// 	}
-			
-		// 	// iterate through right-facing diagonal
-		// 	for (var row = 0; row < $scope.boardWidth; row++){
-		// 		// reset win condition
-		// 		winCondition = 0;
+			// Check Z for col/row wins
+			winCondition = 0;
+			for (var zCounter = 0; zCounter < boardWidth; zCounter++){
+				// If cube has a value, add it to winCondition total
+				if ($scope.dataCube[x][y][zCounter]){
+					winCondition += $scope.dataCube[x][y][zCounter].charCodeAt(0);
+				}
+				if (playerHasWon(winCondition)){
+					break;
+				};
+			}
 
-		// 		for (var index = $scope.boardWidth - 1; index < boardTotal; index = index + ($scope.boardWidth - 1)){
-		// 			gameEnd = $scope.hasPlayerWon(index);
-		// 			if (gameEnd){
-		// 				break;
-		// 			}
-		// 		}
-		// 	}
-		// }	
+			// Check Diagonals
+			// Load array of all diagonal possibilities
+			var diagonals = [
+												[[0,0,0],[1,1,0],[2,2,0]],
+												[[0,0,0],[0,1,1],[0,2,0]],
+												[[0,0,0],[1,0,1],[2,0,2]],
+												[[2,0,0],[1,1,0],[0,2,0]],
+												[[2,0,0],[2,1,1],[2,2,2]],
+												[[2,0,0],[1,0,1],[0,0,2]],
+												[[0,0,2],[1,1,2],[2,2,2]],
+												[[2,0,2],[1,1,2],[0,2,2]],
+												[[2,0,2],[2,1,1],[2,2,0]],
+												[[0,2,0],[1,2,1],[2,2,2]],
+												[[2,2,0],[1,2,1],[0,2,2]]
+											];
+			var clickedCell = [x,y,z];
+			var diagsToCheck = [];
+
+			// Check to see if clicked cell is in diagonal possibilities
+			for (var i = 0; i < diagonals.length ; i++ ){
+				for (var j = 0; j < diagonals[i].length; j++){
+					
+					var isSameCell = 0;
+
+					// If clicked cell is in diagonal, check those diagonals for win
+					for (var k = 0; k < diagonals[i][j].length; k++){
+						if ( diagonals[i][j][k] == clickedCell[k] ){
+							isSameCell++;
+						}
+						if (isSameCell == 3){
+							diagsToCheck.push(diagonals[i]);
+						}
+					}
+				}
+			}
+
+			// Check diagonal possibilities for win
+			// If there are diagonals to check, check 'em
+			if (diagsToCheck){
+				for (var i = 0; i < diagsToCheck.length; i++){
+
+					// Reset winCondition
+					winCondition = 0;
+					for (var j = 0; j < diagsToCheck[i].length; j++){
+
+						// Use coordinates stored in diagsToCheck as indexes for dataCube
+						var index = diagsToCheck[i][j];
+						if ($scope.dataCube[index[0]][index[1]][index[2]]){
+							winCondition += $scope.dataCube[index[0]][index[1]][index[2]].charCodeAt(0);
+						}
+						playerHasWon(winCondition);
+					}
+				}
+			}
+		}
 	};
 
-	$scope.playerHasWon = function hasPlayerWon(i){
-		return false;
+	var playerHasWon = function (winCondition){
 
-		// // start the tally & check for win
-		// 	// add current cell value to winCondition
-		// 	winCondition += boardArray[i];
+		// Check winCondition for each player, return true for face win!
+		if (winCondition == currentPlayer.character.charCodeAt(0) * boardWidth){
 
-		// 	// check winCondition for value of 15 for player1 win, or 21 for player2 win
-		// 	if (winCondition == player1.points * boardHeight || winCondition == player2.points * boardHeight){
-		// 		document.getElementById("message").innerHTML = player.name + " won!";
+			// Increment # of player faces won
+			currentPlayer.facesWon++;
+			completedFaces++;
 
-		// 		// increment win counter for appropriate player
-		// 		if (winCondition == player1.points * boardHeight ){
-		// 			player1.wins++;
-		// 		}
-		// 		else {
-		// 			player2.wins++;
-		// 		}
-		// 		console.log("Hi!");
+			return true;
+		}
+		// If final move and no win, declare tie
+		else if (totalMoves == boardTotal * boardWidth){
+			alert("You tied!")
+			return true;
+		}
 
-		// 		return true;
-		// 	}
+		else {
+			return false;
+		}
+	};	
+ 
+ /* 
+  *
+  * Board & Game Reset
+  * 
+  */
+  // Game Reset
+  $scope.resetGame = function (){
+ 		// Set game-specific counters
+		totalMoves = 0;
+		gameEnd = false;
+		completedFaces = 0;
+		playerIndex = 0;
 
-		// 	// if final move and no win, declare tie
-		// 	else if (totalMoves == boardTotal){
-		// 		document.getElementById("message").innerHTML = "You tied!";
-		// 		return true;
-		// 	}
+		// Reset player game-specific scores
+		for (var i = 0; i < $scope.players.length; i++){
+			$scope.players[i].facesWon = 0;
+		}
 
-		// 	else {
-		// 		return false;
-		// 	}
-		};		
+		// Reset board
+		for (var i = 0; i < $scope.dataCube.length; i++){
+			for (var j = 0; j < $scope.dataCube[i].length; j++){
+				for (var k = 0; k < $scope.dataCube[i][j].length; k++){
+					console.log($scope.dataCube[i][j][k]);
+					$scope.dataCube[i][j][k] = undefined;
+				}
+			}
+		}
+  };
+
+  // Full Reset
+  $scope.resetAll = function (){
+ 		// Reset game-specific things
+ 		$scope.resetGame();
+
+		// Reset players' wins
+		for (var i = 0; i < $scope.players.length; i++){
+			$scope.players[i].wins = 0;
+		}
+	};	
 };
 
+/* 
+
+SOME NOTES
+
+to do:
+	decide on game win conditions (lock out face or not, etc.)
+	implement game win conditions
+
+	fix rotation weirdness
+	integrate into firebase
+
+possibilty to change square background color - 
+	create property of background image / color for each square
+	on play, update background image of object
+	update background image on all corresponding faces
+
+potential add-ons:
+	allow player to select their background image
+
+*/
 

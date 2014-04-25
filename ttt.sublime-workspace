@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"background",
+				"backgroundImage"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"data",
+				"dataCube"
+			],
+			[
+				"board",
+				"boardWidth"
+			],
+			[
+				"display",
+				"displayCube"
+			],
+			[
 				"che",
 				"checkForWin"
 			],
@@ -36,24 +60,12 @@
 				"boardWidth"
 			],
 			[
-				"board",
-				"boardWidth"
-			],
-			[
 				"current",
 				"currentPlayer"
 			],
 			[
 				"c",
 				"currentPlayer"
-			],
-			[
-				"font",
-				"font-size"
-			],
-			[
-				"background",
-				"background-color"
 			],
 			[
 				"margin",
@@ -82,10 +94,6 @@
 			[
 				"padd",
 				"padding-left"
-			],
-			[
-				"back",
-				"background-color"
 			],
 			[
 				"padding",
@@ -283,7 +291,7 @@
 			"file": "css/3dstyle.css",
 			"settings":
 			{
-				"buffer_size": 1397,
+				"buffer_size": 1739,
 				"line_ending": "Unix"
 			}
 		},
@@ -291,7 +299,7 @@
 			"file": "3d.html",
 			"settings":
 			{
-				"buffer_size": 953,
+				"buffer_size": 2881,
 				"line_ending": "Unix"
 			}
 		},
@@ -299,7 +307,7 @@
 			"file": "js/3dapp.js",
 			"settings":
 			{
-				"buffer_size": 8145,
+				"buffer_size": 6690,
 				"line_ending": "Unix"
 			}
 		},
@@ -502,6 +510,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			" rowIndex",
+			" ,",
+			"columnIndex",
+			"faceIndex",
+			"cellIndex",
+			"ellIndex",
+			"cube",
+			"current",
+			"dataCube",
+			"cube",
+			"little",
+			"console",
+			"click",
+			"event",
+			"clickedFace",
 			"boardTotal",
 			"gameEnd",
 			"boardTotal",
@@ -616,7 +639,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -625,15 +648,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1397,
+						"buffer_size": 1739,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								147,
-								147
+								52,
+								52
 							]
 						],
 						"settings":
@@ -642,10 +665,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8.0,
+						"translation.y": 1.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -654,15 +677,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 953,
+						"buffer_size": 2881,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								488,
-								488
+								1285,
+								1285
 							]
 						],
 						"settings":
@@ -674,7 +697,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -689,15 +712,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8145,
+						"buffer_size": 6690,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8135,
-								8135
+								6689,
+								6689
 							]
 						],
 						"settings":
@@ -706,7 +729,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4572.0,
+						"translation.y": 3712.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -772,7 +795,7 @@
 		"cols":
 		[
 			0.0,
-			0.434846759841,
+			0.481881682131,
 			1.0
 		],
 		"rows":
