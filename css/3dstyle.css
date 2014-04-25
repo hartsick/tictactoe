@@ -1,12 +1,17 @@
 body{
-	font-family: sans-serif;
+	font-family: monospace;
+	text-shadow: 4px 4px #000;
 	font-size: 30px;
+	background-color: #140702;
+	background-image: url('../img/diamond.png');
+	/*background-image: url('http://www.transparenttextures.com/patterns/axiom-pattern.png');*/
+	color: white;
 }
 
 #cube-wrap {
-	-webkit-perspective: 1200px;
-	-webkit-perspective-origin: 50% 100px;
-	margin: 150px 0 0 200px;
+	-webkit-perspective: 1000px;
+/*	-webkit-perspective-origin: 50% 200px;*/
+	margin: 100px 0 0 200px;
 
 	-webkit-transition: transform 2s; /* For Safari 3.1 to 6.0 */
 	transition: transform 2s;
@@ -16,24 +21,46 @@ body{
 	position: relative;
 	width: 600px;
 	-webkit-transform-style: preserve-3d;
+
+	 -webkit-animation-name: spincube;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 15s;
+
+  -webkit-transform-origin: 10% 40% 0;
 }
 
+@-webkit-keyframes spincube {
+  from,to  {                                                    }
+  16%      { -webkit-transform: rotateY(-90deg);                }
+  33%      { -webkit-transform: rotateY(-90deg) rotateZ(90deg); }
+  50%      { -webkit-transform: rotateY(-180deg) rotateZ(90deg); }
+  66%      { -webkit-transform: rotateY(90deg) rotateX(90deg);  }
+  83%      { -webkit-transform: rotateX(90deg);                 }
+}
+
+
 .face {
+	color: lime;
 	position: absolute;
 	width: 300px;
 	height: 300px;
 	background-color: rgba(255,255,255,.8);
+	background-image: url('../img/glitchbow.png');
+	background-size: cover;
+	/*background-image: url('http://www.transparenttextures.com/patterns/batthern.png');*/
 	-webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
 }
 
 .face div, .face div div {
-	width: 96px;
-	height: 96px;
-	border: 2px solid black;
+	width: 98px;
+	height: 98px;
+	border: 1px solid white;
 	float: left;
 	font-size: 80px;
 	font-family: sans-serif;
 	text-align: center;
+	-webkit-backface-visibility: hidden;
 }
 
 .face-3 /* back */{
@@ -99,3 +126,11 @@ dl {
 	padding: 10px 30px 10px 10px;
 }
 
+#scores {
+	text-shadow: 2px 2px magenta;
+	color: lime;
+}
+button {
+	background-color: black;
+	border-radius: 15px;
+}

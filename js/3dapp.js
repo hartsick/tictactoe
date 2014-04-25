@@ -1,5 +1,12 @@
 function TTTController($scope){
 
+// var tttApp = angular.module('tttApp', ["firebase"])
+// 	.controller('TTTController', function($scope, $firebase){
+
+  // var tttRef = new Firebase("https://tcubed.firebaseio.com");
+  // // Automatically syncs everywhere in realtime
+  // $scope.ttt = $firebase(tttRef);
+
 	// Instantiate players
 	$scope.players = [
 		{
@@ -84,6 +91,7 @@ function TTTController($scope){
 	// Initialize rotation increments
 	$scope.currentXdeg = 0;
 	$scope.currentYdeg = 0;
+	$scope.currentZdeg = 0;
 	$scope.currentXtrans = 0;
 	$scope.currentYtrans = 0;
 	$scope.currentZtrans = -100;
@@ -114,11 +122,12 @@ function TTTController($scope){
 		console.log($scope.currentXdeg);
 
 		// Compile the css tranformations & display
-		var transform = "rotateX("  + $scope.currentXdeg + "deg) ";
-				transform += "rotateY(" + $scope.currentYdeg + "deg) ";
-				transform += "translateX(" + $scope.currentXtrans + "px) ";
-				transform += "translateY(" + $scope.currentYtrans + "px) "; 
-				transform += "translateZ(" + $scope.currentZtrans + "px)";
+		var transform = "rotate3d("  + $scope.currentXdeg + "deg ";
+				transform += $scope.currentYdeg + "deg ";
+				transform += $scope.currentZdeg + "deg) ";
+				transform += "translate3d(" + $scope.currentXtrans + "px ";
+				transform += $scope.currentYtrans + "px "; 
+				transform += $scope.currentZtrans + "px)";
 		console.log(transform);
 		cubeWrap.style.webkitTransform = transform;
 
@@ -317,7 +326,6 @@ function TTTController($scope){
 		for (var i = 0; i < $scope.dataCube.length; i++){
 			for (var j = 0; j < $scope.dataCube[i].length; j++){
 				for (var k = 0; k < $scope.dataCube[i][j].length; k++){
-					console.log($scope.dataCube[i][j][k]);
 					$scope.dataCube[i][j][k] = undefined;
 				}
 			}
@@ -334,7 +342,9 @@ function TTTController($scope){
 			$scope.players[i].wins = 0;
 		}
 	};	
-};
+}
+// )
+;
 
 /* 
 
