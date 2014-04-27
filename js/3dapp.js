@@ -1,49 +1,19 @@
-function TTTController($scope){
+// dependency injection - firebase and $scope
+var tttApp = angular.module('tttApp', ["firebase"]);
 
-// var tttApp = angular.module('tttApp', ["firebase"])
-// 	.controller('TTTController', function($scope, $firebase){
+tttApp.controller('TTTController', function($scope, $firebase){
 
-  // var tttRef = new Firebase("https://tcubed.firebaseio.com");
-  // // Automatically syncs everywhere in realtime
-  // $scope.ttt = $firebase(tttRef);
+  var tttRef = new Firebase("https://tcubed.firebaseio.com/games");
 
-	// Instantiate players
-	$scope.players = [
-		{
-			name: "Player 1",
-			character: "X",
-			value: 1,
-			wins: 0,
-			color: 'rgba(0,0,200, .5)',
-			img: 'url("img/glitchbow.png")',
-			facesWon: 0
-		},
-		{
-			name: "Player 2",
-			character: "O",
-			value: -1,
-			wins: 0,
-			color: 'rgba(200,0,0,.5)',
-			img: 'url("img/glitchpoke.png")',
-			facesWon: 0
-		}
-	];
+  // Automatically syncs everywhere in realtime
+  $scope.ttt = $firebase(tttRef);
 
 	// Set Defaults
 	var numPlayers = 2;
 
-	// Initialize current player
-	var playerIndex = 0;
-	var currentPlayer = $scope.players[playerIndex];
-
 	// Set board width for each face
 	var boardWidth = 3;
 	var boardTotal = boardWidth * boardWidth;
-
-	// Initialize moves
-	var totalMoves = 0;
-	var gameEnd = false;
-	var completedFaces = 0;
 
 	/*
 	 *
@@ -52,20 +22,126 @@ function TTTController($scope){
 	 */ 
 	var createDataCube = function(){
 		// create data cube array
-		var innerCube = [];
+		var cube = [];
 
 		// Create multi-dimensional array to store in main array
 		for (var i = 0; i < boardWidth; i++){
 			var innerArray = [];
 			for (var j = 0; j < boardWidth; j++){
-				innerArray[j] = new Array(3);
+				// Create array to hold cells
+				innerArray[j] = new Array(1);
+				for (var k = 0; k < boardWidth; k++ ){
+					// Store empty cell object
+					innerArray[j][k] = " ";
+				}
 			}
 			// Store inner array in main array at given index
-			innerCube[i] = innerArray;
+			cube[i] = innerArray;
 		}	
-		return innerCube;
+		return cube;
 	};
-	$scope.dataCube = createDataCube();
+	var dataCube = createDataCube();
+
+
+	/*
+	 * 
+	 * Firebase Integration
+	 *
+	 */
+	var lastGame; 
+	var lastGameKey;
+	tttRef.once('value', function(gamesSnapshot){
+		var games = gamesSnapshot.val();
+
+		// No games at all, so make a new game 
+		if (games == null){
+			lastGame = tttRef.push( {waiting: true} );
+			// Set Player 1
+			player = {
+							name: "Player 1",
+							character: "X",
+							wins: 0,
+							color: 'rgba(0,0,200, .5)',
+							img: 'url("img/glitchbow.png")',
+							facesWon: 0
+						};
+		}
+		// If game exists...
+		else {
+			var keys = Object.keys(games);
+			lastGameKey = keys[ keys.length - 1 ];
+			lastGame = games [ lastGameKey ];
+			console.log("This person's game: " + lastGameKey);
+
+			// If person is waiting...
+			if (lastGame.waiting){
+				// Grab last game object from Firebase
+				lastGame = tttRef.child(lastGameKey);
+
+				// Set a new game
+	      lastGame.set({
+	     		waiting: false, 
+	     		currentPlayer: 		{
+						name: "Player 1",
+						character: "X",
+						wins: 0,
+						color: 'rgba(0,0,200, .5)',
+						img: 'url("img/glitchbow.png")',
+						facesWon: 0
+					}, 
+	     		players: 		
+	     		[{
+							name: "Player 1",
+							character: "X",
+							wins: 0,
+							color: 'rgba(0,0,200, .5)',
+							img: 'url("img/glitchbow.png")',
+							facesWon: 0
+						},
+						{
+							name: "Player 2",
+							character: "O",
+							wins: 0,
+							color: 'rgba(200,0,0,.5)',
+							img: 'url("img/glitchpoke.png")',
+							facesWon: 0
+						}],
+	     		completedFaces: 0,
+	     		playerIndex: 0,
+	     		totalMoves: 0,
+	     		gameEnd: false, 
+	     		board: dataCube
+		   	});
+		   	// Set as Player 2
+	      player = {
+							name: "Player 2",
+							character: "O",
+							wins: 0,
+							color: 'rgba(200,0,0,.5)',
+							img: 'url("img/glitchpoke.png")',
+							facesWon: 0
+				};
+				console.log("Local player " + player.name);
+			}
+			else {
+				// Make a new game
+				lastGame = tttRef.push( {waiting: true} );
+				// Set as Player 1
+				player = {
+							name: "Player 1",
+							character: "X",
+							wins: 0,
+							color: 'rgba(0,0,200, .5)',
+							img: 'url("img/glitchbow.png")',
+							facesWon: 0
+						};
+				console.log("Local player " + player.name);
+			}
+		  // Attach the last game to what we're up to
+		  $scope.game = $firebase(lastGame);
+		}
+	});
+
 
   /*
 	 *
@@ -140,23 +216,29 @@ function TTTController($scope){
 	 */
 	$scope.clicker = function(x, y, z, clickEvent) {
 		console.log("x: " + x + " y: " + y + " z: " + z);
-		// If clicked cell is onoccupied, take a turn
-		if ($scope.dataCube[x][y][z] == undefined){
 
-			// If cell is empty, place marker & switch player
-			$scope.dataCube[x][y][z] = currentPlayer.character;
-			//clickEvent.target.style.backgroundImage = currentPlayer.img;
+		// only allow current player to place turn
+		if (player.name == $scope.game.currentPlayer.name){
+			// If clicked cell is onoccupied, take a turn
+			if ($scope.game.board[x][y][z] == " "){
 
-			// Increment total moves
-			totalMoves++;
+				// If cell is empty, place marker
+				$scope.game.board[x][y][z] = $scope.game.currentPlayer.character;
 
-			console.log("Data cube: " + $scope.dataCube);
-			$scope.checkForWin(x,y,z);
-			$scope.switchPlayer();
+				// Increment total moves
+				$scope.game.totalMoves++;
+
+				// Do rest of turn
+				$scope.checkForWin(x,y,z);
+				$scope.switchPlayer();
+			}
+			else{
+				alert("Pick an unoccupied cell!");
+			}
 		}
-		else{
-			alert("Pick an unoccupied cell!");
-		}
+
+		// Save to Firebase
+		$scope.game.$save();
 	};
 
 	/*
@@ -167,15 +249,18 @@ function TTTController($scope){
 	 */
 	$scope.switchPlayer = function(){
 		// Increment player index
-		playerIndex++;
+		$scope.game.playerIndex++;
 
 		// If index is greater than the number of players, bring it back around
-		if (playerIndex > numPlayers - 1){
-			playerIndex = 0;
+		if ($scope.game.playerIndex > numPlayers - 1){
+			$scope.game.playerIndex = 0;
 		}
-
 		// Update current player
-		currentPlayer = $scope.players[playerIndex];
+		$scope.game.currentPlayer = $scope.game.players[$scope.game.playerIndex];
+
+		// Save to Firebase
+		$scope.game.$save();
+
 	};
 
 
@@ -185,10 +270,10 @@ function TTTController($scope){
 	 * 
 	 */
 	$scope.checkForWin = function(x,y,z) {
-		console.log(totalMoves);
+		console.log("Total moves: " + $scope.game.totalMoves);
 
 		// If total moves is enough to win, check for win!
-		if (totalMoves > (numPlayers * 3) - 2){
+		if ($scope.game.totalMoves > (numPlayers * 3) - 2){
 
 			// Create empty winCondition
 			var winCondition;
@@ -197,8 +282,8 @@ function TTTController($scope){
 			winCondition = 0;
 			for (var xCounter = 0; xCounter < boardWidth; xCounter++){
 				// If cube has a value, add it to winCondition total
-				if ($scope.dataCube[xCounter][y][z]){
-					winCondition += $scope.dataCube[xCounter][y][z].charCodeAt(0);
+				if ($scope.game.board[xCounter][y][z] != " "){
+					winCondition += $scope.game.board[xCounter][y][z].charCodeAt(0);
 				}
 				playerHasWon(winCondition);
 			}
@@ -207,8 +292,8 @@ function TTTController($scope){
 			winCondition = 0;
 			for (var yCounter = 0; yCounter < boardWidth; yCounter++){
 				// If cube has a value, add it to winCondition total
-				if ($scope.dataCube[x][yCounter][z]){
-					winCondition += $scope.dataCube[x][yCounter][z].charCodeAt(0);
+				if ($scope.game.board[x][yCounter][z] != " "){
+					winCondition += $scope.game.board[x][yCounter][z].charCodeAt(0);
 				}
 				playerHasWon(winCondition);
 			}
@@ -217,8 +302,8 @@ function TTTController($scope){
 			winCondition = 0;
 			for (var zCounter = 0; zCounter < boardWidth; zCounter++){
 				// If cube has a value, add it to winCondition total
-				if ($scope.dataCube[x][y][zCounter]){
-					winCondition += $scope.dataCube[x][y][zCounter].charCodeAt(0);
+				if ($scope.game.board[x][y][zCounter] != " "){
+					winCondition += $scope.game.board[x][y][zCounter].charCodeAt(0);
 				}
 				if (playerHasWon(winCondition)){
 					break;
@@ -272,33 +357,42 @@ function TTTController($scope){
 
 						// Use coordinates stored in diagsToCheck as indexes for dataCube
 						var index = diagsToCheck[i][j];
-						if ($scope.dataCube[index[0]][index[1]][index[2]]){
-							winCondition += $scope.dataCube[index[0]][index[1]][index[2]].charCodeAt(0);
+						if ($scope.game.board[index[0]][index[1]][index[2]]){
+							winCondition += $scope.game.board[index[0]][index[1]][index[2]].charCodeAt(0);
 						}
 						playerHasWon(winCondition);
 					}
 				}
 			}
 		}
+		
+		// SAVE 
+		$scope.game.$save();
 	};
 
 	var playerHasWon = function (winCondition){
 
 		// Check winCondition for each player, return true for face win!
-		if (winCondition == currentPlayer.character.charCodeAt(0) * boardWidth){
+		if (winCondition == $scope.game.currentPlayer.character.charCodeAt(0) * boardWidth){
 
-			// Increment # of player faces won
-			currentPlayer.facesWon++;
-			completedFaces++;
+			// Increment # of total faces won
+			$scope.game.completedFaces++;
+
+			// Increment appropriate player score in Firebase
+			if ($scope.game.currentPlayer.name == $scope.game.players[0].name){
+				$scope.game.players[0].facesWon++;
+			}
+			else {
+				$scope.game.players[1].facesWon++;
+			}
 
 			return true;
 		}
 		// If final move and no win, declare tie
-		else if (totalMoves == boardTotal * boardWidth){
+		else if ($scope.game.totalMoves == boardTotal * boardWidth){
 			alert("You tied!")
 			return true;
 		}
-
 		else {
 			return false;
 		}
@@ -312,24 +406,30 @@ function TTTController($scope){
   // Game Reset
   $scope.resetGame = function (){
  		// Set game-specific counters
-		totalMoves = 0;
-		gameEnd = false;
-		completedFaces = 0;
-		playerIndex = 0;
+		$scope.game.totalMoves = 0;
+		$scope.game.gameEnd = false;
+		$scope.game.completedFaces = 0;
+
+		// Reset Player to 1
+		$scope.game.playerIndex = 0;
+		$scope.game.currentPlayer = $scope.game.players[$scope.game.playerIndex];
 
 		// Reset player game-specific scores
-		for (var i = 0; i < $scope.players.length; i++){
-			$scope.players[i].facesWon = 0;
+		for (var i = 0; i < $scope.game.players.length; i++){
+			$scope.game.players[i].facesWon = 0;
 		}
 
 		// Reset board
-		for (var i = 0; i < $scope.dataCube.length; i++){
-			for (var j = 0; j < $scope.dataCube[i].length; j++){
-				for (var k = 0; k < $scope.dataCube[i][j].length; k++){
-					$scope.dataCube[i][j][k] = undefined;
+		for (var i = 0; i < $scope.game.board.length; i++){
+			for (var j = 0; j < $scope.game.board[i].length; j++){
+				for (var k = 0; k < $scope.game.board[i][j].length; k++){
+					$scope.game.board[i][j][k] = " ";
 				}
 			}
 		}
+
+		// Save changes to firebase
+		$scope.game.$save();
   };
 
   // Full Reset
@@ -338,13 +438,14 @@ function TTTController($scope){
  		$scope.resetGame();
 
 		// Reset players' wins
-		for (var i = 0; i < $scope.players.length; i++){
-			$scope.players[i].wins = 0;
+		for (var i = 0; i < $scope.game.players.length; i++){
+			$scope.game.players[i].wins = 0;
 		}
+
+		// Save changes to firebase
+		$scope.game.$save();
 	};	
-}
-// )
-;
+});
 
 /* 
 
@@ -356,6 +457,10 @@ to do:
 
 	fix rotation weirdness
 	integrate into firebase
+		switch player
+		have player execute turn
+			update board, player score
+
 
 possibilty to change square background color - 
 	create property of background image / color for each square
@@ -365,5 +470,8 @@ possibilty to change square background color -
 potential add-ons:
 	allow player to select their background image
 
+
+TO DO
+	Player appears to not be switching (player 2)
 */
 
