@@ -112,7 +112,8 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 	     		playerIndex: 0,
 	     		totalMoves: 0,
 	     		gameEnd: false, 
-	     		board: dataCube
+	     		board: dataCube,
+	     		winMessage: " "
 		   	});
 		   	// Set as Player 2
 	      $scope.player = {
@@ -218,35 +219,38 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 	 */
 	$scope.clicker = function(x, y, z, clickEvent) {
 		console.log("x: " + x + " y: " + y + " z: " + z);
-		console.log($scope.player.name == $scope.game.currentPlayer.name);
 
-		// Only allow current player to place turn
-		if ($scope.player.name == $scope.game.currentPlayer.name){
+		if (!$scope.game.gameEnd){
+			// Only allow current player to place turn
+			if ($scope.player.name == $scope.game.currentPlayer.name){
 
-			// If clicked cell is onoccupied, take a turn
-			if ($scope.game.board[x][y][z].cell == " "){
+				// If clicked cell is unoccupied, take a turn
+				if ($scope.game.board[x][y][z].cell == " "){
 
-				// If cell is empty, place X or O & update background
-				$scope.game.board[x][y][z].cell = $scope.game.currentPlayer.character;
-				$scope.game.board[x][y][z].bg = $scope.game.currentPlayer.color;
+					// If cell is empty, place X or O & update background
+					$scope.game.board[x][y][z].cell = $scope.game.currentPlayer.character;
+					$scope.game.board[x][y][z].bg = $scope.game.currentPlayer.color;
 
-				// Increment total moves
-				$scope.game.totalMoves++;
+					// Increment total moves
+					$scope.game.totalMoves++;
 
-				// Do rest of turn
-				$scope.checkForWin(x,y,z);
-				$scope.switchPlayer();
-			}
-			else {
-				// Flash red!
-				var bg = $scope.game.board[x][y][z].bg;
-				console.log("bg1: " + bg);
-				$scope.game.board[x][y][z].bg = 'rgba(239,16,59,.5)';
-				$timeout(function(){ 
-					$scope.game.board[x][y][z].bg = bg;
-				}, 100);
+					// Do rest of turn
+					$scope.checkForScore(x,y,z);
+					if (!$scope.game.gameEnd){
+						$scope.switchPlayer();
+					}
+				}
+				// If occupied, flash the cell red
+				else {
+					var bg = $scope.game.board[x][y][z].bg;
+					$scope.game.board[x][y][z].bg = 'rgba(239,16,59,.5)';
+					$timeout(function(){ 
+						$scope.game.board[x][y][z].bg = bg;
+					}, 100);
+				}
 			}
 		}
+		console.log($scope.game.gameEnd);
 
 		// Save to Firebase
 		$scope.game.$save();
@@ -280,7 +284,7 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 	 * Check for Win
 	 * 
 	 */
-	$scope.checkForWin = function(x,y,z) {
+	$scope.checkForScore = function(x,y,z) {
 		console.log("Total moves: " + $scope.game.totalMoves);
 
 		// If total moves is enough to win, check for win!
@@ -296,7 +300,7 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 				if ($scope.game.board[xCounter][y][z].cell != " "){
 					winCondition += $scope.game.board[xCounter][y][z].cell.charCodeAt(0);
 				}
-				playerHasWon(winCondition);
+				$scope.game.gameEnd = faceIsWon(winCondition);
 			}
 
 			// Check Y for col/row wins
@@ -306,7 +310,7 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 				if ($scope.game.board[x][yCounter][z].cell != " "){
 					winCondition += $scope.game.board[x][yCounter][z].cell.charCodeAt(0);
 				}
-				playerHasWon(winCondition);
+				$scope.game.gameEnd = faceIsWon(winCondition);
 			}
 
 			// Check Z for col/row wins
@@ -316,9 +320,7 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 				if ($scope.game.board[x][y][zCounter].cell != " "){
 					winCondition += $scope.game.board[x][y][zCounter].cell.charCodeAt(0);
 				}
-				if (playerHasWon(winCondition)){
-					break;
-				};
+				$scope.game.gameEnd = faceIsWon(winCondition);
 			}
 
 			// Check Diagonals
@@ -371,7 +373,7 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 						if ($scope.game.board[index[0]][index[1]][index[2]].cell){
 							winCondition += $scope.game.board[index[0]][index[1]][index[2]].cell.charCodeAt(0);
 						}
-						playerHasWon(winCondition);
+						$scope.game.gameEnd = faceIsWon(winCondition);
 					}
 				}
 			}
@@ -381,9 +383,9 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 		$scope.game.$save();
 	};
 
-	var playerHasWon = function (winCondition){
+	var faceIsWon = function (winCondition){
 
-		// Check winCondition for each player, return true for face win!
+		// If three in a row are found...
 		if (winCondition == $scope.game.currentPlayer.character.charCodeAt(0) * boardWidth){
 
 			// Increment # of total faces won
@@ -397,12 +399,34 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 				$scope.game.players[1].facesWon++;
 			}
 
-			return true;
+			// Remove face from list of possible faces
+
+			// // If player has won over 3 faces, they win
+			// if ($scope.game.currentPlayer.facesWon++ > 3){
+			// 	$scope.game.winMessage = $scope.game.currentPlayer.name + " won!";
+			// 	return true;
+			// }
 		}
 		// If final move and no win, declare tie
-		else if ($scope.game.totalMoves == boardTotal * boardWidth){
-			alert("You tied!")
-			return true;
+		if ($scope.game.totalMoves == 26 ){
+
+			// If player 1 has highest score, announce win
+			if ($scope.game.players[0].facesWon > $scope.game.players[1].facesWon){
+				$scope.game.players[0].wins++;
+				$scope.game.winMessage = $scope.game.players[0].name + " won!";
+				return true;
+			}
+			// If player 2 has highest score, announce win
+			else if ($scope.game.players[1].facesWon > $scope.game.players[0].facesWon){
+				$scope.game.players[1].wins++;
+				$scope.game.winMessage = $scope.game.players[1].name + " won!";
+				return true;
+			}
+			// If equal, declare tie
+			else {
+				$scope.game.winMessage = "Game over. Tie match.";
+				return true;
+			}
 		}
 		else {
 			return false;
@@ -420,6 +444,7 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 		$scope.game.totalMoves = 0;
 		$scope.game.gameEnd = false;
 		$scope.game.completedFaces = 0;
+		$scope.game.winMessage = " ";
 
 		// Reset Player to 1
 		$scope.game.playerIndex = 0;
@@ -441,6 +466,7 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 				}
 			}
 		}
+		console.log($scope.game);
 
 		// Save changes to firebase
 		$scope.game.$save();
@@ -455,7 +481,7 @@ tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 		for (var i = 0; i < $scope.game.players.length; i++){
 			$scope.game.players[i].wins = 0;
 		}
-
+		console.log($scope.game);
 		// Save changes to firebase
 		$scope.game.$save();
 	};	
@@ -480,7 +506,7 @@ potential add-ons:
 
 alert
 	-when other player's turn
-	-
+
 */
 
 /* Locking out a face

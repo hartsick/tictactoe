@@ -167,11 +167,12 @@ button:hover {
 /* Cube animation */
 @-webkit-keyframes spincube {
   from,to  {                                                    }
-  16%      { -webkit-transform: rotateY(-90deg);                }
-  33%      { -webkit-transform: rotateY(-90deg) rotateZ(45deg); }
-  50%      { -webkit-transform: rotateY(-180deg) rotateZ(135deg); }
-  66%      { -webkit-transform: rotateY(90deg) rotateX(90deg);  }
-  83%      { -webkit-transform: rotateX(90deg);                 }
+  14%      { -webkit-transform: rotateY(-90deg);                }
+  32%      { -webkit-transform: rotateY(-90deg) rotateZ(90deg); }
+  46%      { -webkit-transform: rotateY(-90deg) rotateZ(90deg); }
+  62%      { -webkit-transform: rotateY(-90deg) rotateZ(90deg); }
+  75%      { -webkit-transform: rotateY(-90deg) rotateX(90deg);  }
+  90%      { -webkit-transform: rotateX(90deg);                 }
 }
 @-moz-keyframes spincube {
   from,to  {                                                    }

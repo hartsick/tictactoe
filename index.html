@@ -32,7 +32,7 @@
 		<div class="left-container">
 			<h1>t_cubed</h1>
 			<!-- Cube wrapper -->
-			<div id="cube-wrap" x-ng-show="!game.waiting;" x-ng-cloak>
+			<div id="cube-wrap" x-ng-show="!game.waiting" x-ng-cloak>
 				<div id="cube">
 						<!-- front -->
 						<div class="face face-2">
@@ -81,26 +81,27 @@
 			</div>
 		</div>
 
-		<div class="right-container" x-ng-show="!game.waiting;" x-ng-cloak>
+		<div class="right-container" x-ng-show="!game.waiting" x-ng-cloak>
 			<!-- In-turn player message -->
 			<div class="player-name">
 				{{player.name}}
 			</div>
-			<div class="player-message">
-				<p x-ng-show="!(player.name == game.currentPlayer.name) && !game.waiting">
+			<div class="player-message" x-ng-cloak>
+				<p x-ng-show="!(player.name == game.currentPlayer.name) && !game.waiting && !game.gameEnd">
 				Waiting for {{game.currentPlayer.name}} to make a move...
 				</p>
-				<p x-ng-show="(player.name == game.currentPlayer.name) && !game.waiting" x-ng-cloak>
+				<p x-ng-show="(player.name == game.currentPlayer.name) && !game.waiting && !game.gameEnd">
 				Your turn!
 				</p>
+				<p x-ng-show="game.gameEnd">Game over! {{game.winMessage}}</p>
 			</div>
 
 			<!-- Score Tally -->
 			<div id="scores">
 				<dl x-ng-repeat="player in game.players">
 					<dt>{{player.name}}:</dt> 
-					<dd>Faces won: {{player.facesWon}}</dd>
-					<dd>Wins: {{player.wins}}</dd>
+					<dd>ttts: {{player.facesWon}}</dd>
+					<dd>wins: {{player.wins}}</dd>
 				</dl>
 				<!-- Game Reset -->
 				<button x-ng-click="resetGame();" type="button">New Game</button><br />
