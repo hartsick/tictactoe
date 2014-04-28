@@ -1,6 +1,5 @@
-// dependency injection - firebase and $scope
+// Dependency injection - firebase and $scope
 var tttApp = angular.module('tttApp', ["firebase"]);
-
 tttApp.controller('TTTController', function($scope, $firebase){
 
   var tttRef = new Firebase("https://tcubed.firebaseio.com/games");
@@ -32,14 +31,17 @@ tttApp.controller('TTTController', function($scope, $firebase){
 				innerArray[j] = new Array(1);
 				for (var k = 0; k < boardWidth; k++ ){
 					// Store empty cell object
-					innerArray[j][k] = " ";
+					innerArray[j][k] = {
+						cell: " ",
+						bg: ""
+					};
 				}
-			}
-			// Store inner array in main array at given index
-			cube[i] = innerArray;
-		}	
+				// Store inner array in main array at given index
+				cube[i] = innerArray;
+			}	
+		}
 		return cube;
-	};
+	}
 	var dataCube = createDataCube();
 
 
@@ -57,11 +59,11 @@ tttApp.controller('TTTController', function($scope, $firebase){
 		if (games == null){
 			lastGame = tttRef.push( {waiting: true} );
 			// Set Player 1
-			player = {
+			$scope.player = {
 							name: "Player 1",
 							character: "X",
 							wins: 0,
-							color: 'rgba(0,0,200, .5)',
+							color: 'rgba(255,255,255, .7)',
 							img: 'url("img/glitchbow.png")',
 							facesWon: 0
 						};
@@ -85,7 +87,7 @@ tttApp.controller('TTTController', function($scope, $firebase){
 						name: "Player 1",
 						character: "X",
 						wins: 0,
-						color: 'rgba(0,0,200, .5)',
+						color: 'rgba(255,255,255, .6)',
 						img: 'url("img/glitchbow.png")',
 						facesWon: 0
 					}, 
@@ -94,7 +96,7 @@ tttApp.controller('TTTController', function($scope, $firebase){
 							name: "Player 1",
 							character: "X",
 							wins: 0,
-							color: 'rgba(0,0,200, .5)',
+							color: 'rgba(255,255,255, .6)',
 							img: 'url("img/glitchbow.png")',
 							facesWon: 0
 						},
@@ -102,7 +104,7 @@ tttApp.controller('TTTController', function($scope, $firebase){
 							name: "Player 2",
 							character: "O",
 							wins: 0,
-							color: 'rgba(200,0,0,.5)',
+							color: 'rgba(0,0,0,.8)',
 							img: 'url("img/glitchpoke.png")',
 							facesWon: 0
 						}],
@@ -113,21 +115,21 @@ tttApp.controller('TTTController', function($scope, $firebase){
 	     		board: dataCube
 		   	});
 		   	// Set as Player 2
-	      player = {
+	      $scope.player = {
 							name: "Player 2",
 							character: "O",
 							wins: 0,
-							color: 'rgba(200,0,0,.5)',
+							color: 'rgba(200,0,0,.8)',
 							img: 'url("img/glitchpoke.png")',
 							facesWon: 0
 				};
-				console.log("Local player " + player.name);
+				console.log("Local player " + $scope.player.name);
 			}
 			else {
 				// Make a new game
 				lastGame = tttRef.push( {waiting: true} );
 				// Set as Player 1
-				player = {
+				$scope.player = {
 							name: "Player 1",
 							character: "X",
 							wins: 0,
@@ -135,7 +137,7 @@ tttApp.controller('TTTController', function($scope, $firebase){
 							img: 'url("img/glitchbow.png")',
 							facesWon: 0
 						};
-				console.log("Local player " + player.name);
+				console.log("Local player " + $scope.player.name);
 			}
 		  // Attach the last game to what we're up to
 		  $scope.game = $firebase(lastGame);
@@ -143,71 +145,71 @@ tttApp.controller('TTTController', function($scope, $firebase){
 	});
 
 
-  /*
-	 *
-	 * Rotate the cube
-	 *
-	 */
-	// Initialize controls
-	$scope.controls = [
-		{
-			direction: "up",
-		},
-		{
-			direction: "down"
-		},
-		{
-			direction: "right"
-		},
-		{
-			direction: "left"
-		}
-	];
+ //  /*
+	//  *
+	//  * Rotate the cube
+	//  *
+	//  */
+	// // Initialize controls
+	// $scope.controls = [
+	// 	{
+	// 		direction: "up",
+	// 	},
+	// 	{
+	// 		direction: "down"
+	// 	},
+	// 	{
+	// 		direction: "right"
+	// 	},
+	// 	{
+	// 		direction: "left"
+	// 	}
+	// ];
 
-	// Initialize rotation increments
-	$scope.currentXdeg = 0;
-	$scope.currentYdeg = 0;
-	$scope.currentZdeg = 0;
-	$scope.currentXtrans = 0;
-	$scope.currentYtrans = 0;
-	$scope.currentZtrans = -100;
+	// // Initialize rotation increments
+	// $scope.currentXdeg = 0;
+	// $scope.currentYdeg = 0;
+	// $scope.currentZdeg = 0;
+	// $scope.currentXtrans = 0;
+	// $scope.currentYtrans = 0;
+	// $scope.currentZtrans = -100;
 
-	// Rotate that cube!
-	$scope.rotateCube = function(controlName){
+	// // Rotate that cube!
+	// $scope.rotateCube = function(controlName){
 
-		// Snag the cube wrapper
-		var cubeWrap = document.getElementById('cube');
+	// 	// Snag the cube wrapper
+	// 	var cubeWrap = document.getElementById('cube');
 
-		// Increment current degree rotation based on selected command
-		if (controlName == "right"){
-			$scope.currentYdeg += 90;
-		}
-		else if (controlName == "left"){
-			$scope.currentYdeg -= 90;
-		}
-		else if (controlName == "up"){
-			$scope.currentXdeg += 90;
-		}
-		else {
-			$scope.currentXdeg -= 90;
-		}
+	// 	// Increment current degree rotation based on selected command
+	// 	if (controlName == "right"){
+	// 		$scope.currentYdeg += 90;
+	// 	}
+	// 	else if (controlName == "left"){
+	// 		$scope.currentYdeg -= 90;
+	// 	}
+	// 	else if (controlName == "up"){
+	// 		$scope.currentXdeg += 90;
+	// 	}
+	// 	else {
+	// 		$scope.currentXdeg -= 90;
+	// 	}
 
-		// Checking current x & y degrees
-		console.log("Control: " + controlName);
-		console.log($scope.currentYdeg);
-		console.log($scope.currentXdeg);
+	// 	// Checking current x & y degrees
+	// 	console.log("Control: " + controlName);
+	// 	console.log($scope.currentYdeg);
+	// 	console.log($scope.currentXdeg);
 
-		// Compile the css tranformations & display
-		var transform = "rotate3d("  + $scope.currentXdeg + "deg ";
-				transform += $scope.currentYdeg + "deg ";
-				transform += $scope.currentZdeg + "deg) ";
-				transform += "translate3d(" + $scope.currentXtrans + "px ";
-				transform += $scope.currentYtrans + "px "; 
-				transform += $scope.currentZtrans + "px)";
-		console.log(transform);
-		cubeWrap.style.webkitTransform = transform;
+	// 	// Compile the css tranformations & display
+	// 	var transform = "rotate3d("  + $scope.currentXdeg + "deg ";
+	// 			transform += $scope.currentYdeg + "deg ";
+	// 			transform += $scope.currentZdeg + "deg) ";
+	// 			transform += "translate3d(" + $scope.currentXtrans + "px ";
+	// 			transform += $scope.currentYtrans + "px "; 
+	// 			transform += $scope.currentZtrans + "px)";
+	// 	console.log(transform);
+	// 	cubeWrap.style.webkitTransform = transform;
 
-	};
+	// };
 
 	/*
 	 *
@@ -216,14 +218,17 @@ tttApp.controller('TTTController', function($scope, $firebase){
 	 */
 	$scope.clicker = function(x, y, z, clickEvent) {
 		console.log("x: " + x + " y: " + y + " z: " + z);
+		console.log($scope.player.name == $scope.game.currentPlayer.name);
 
-		// only allow current player to place turn
-		if (player.name == $scope.game.currentPlayer.name){
+		// Only allow current player to place turn
+		if ($scope.player.name == $scope.game.currentPlayer.name){
+
 			// If clicked cell is onoccupied, take a turn
-			if ($scope.game.board[x][y][z] == " "){
+			if ($scope.game.board[x][y][z].cell == " "){
 
-				// If cell is empty, place marker
-				$scope.game.board[x][y][z] = $scope.game.currentPlayer.character;
+				// If cell is empty, place X or O & update background
+				$scope.game.board[x][y][z].cell = $scope.game.currentPlayer.character;
+				$scope.game.board[x][y][z].bg = $scope.game.currentPlayer.color;
 
 				// Increment total moves
 				$scope.game.totalMoves++;
@@ -231,9 +236,6 @@ tttApp.controller('TTTController', function($scope, $firebase){
 				// Do rest of turn
 				$scope.checkForWin(x,y,z);
 				$scope.switchPlayer();
-			}
-			else{
-				alert("Pick an unoccupied cell!");
 			}
 		}
 
@@ -282,8 +284,8 @@ tttApp.controller('TTTController', function($scope, $firebase){
 			winCondition = 0;
 			for (var xCounter = 0; xCounter < boardWidth; xCounter++){
 				// If cube has a value, add it to winCondition total
-				if ($scope.game.board[xCounter][y][z] != " "){
-					winCondition += $scope.game.board[xCounter][y][z].charCodeAt(0);
+				if ($scope.game.board[xCounter][y][z].cell != " "){
+					winCondition += $scope.game.board[xCounter][y][z].cell.charCodeAt(0);
 				}
 				playerHasWon(winCondition);
 			}
@@ -292,8 +294,8 @@ tttApp.controller('TTTController', function($scope, $firebase){
 			winCondition = 0;
 			for (var yCounter = 0; yCounter < boardWidth; yCounter++){
 				// If cube has a value, add it to winCondition total
-				if ($scope.game.board[x][yCounter][z] != " "){
-					winCondition += $scope.game.board[x][yCounter][z].charCodeAt(0);
+				if ($scope.game.board[x][yCounter][z].cell != " "){
+					winCondition += $scope.game.board[x][yCounter][z].cell.charCodeAt(0);
 				}
 				playerHasWon(winCondition);
 			}
@@ -302,8 +304,8 @@ tttApp.controller('TTTController', function($scope, $firebase){
 			winCondition = 0;
 			for (var zCounter = 0; zCounter < boardWidth; zCounter++){
 				// If cube has a value, add it to winCondition total
-				if ($scope.game.board[x][y][zCounter] != " "){
-					winCondition += $scope.game.board[x][y][zCounter].charCodeAt(0);
+				if ($scope.game.board[x][y][zCounter].cell != " "){
+					winCondition += $scope.game.board[x][y][zCounter].cell.charCodeAt(0);
 				}
 				if (playerHasWon(winCondition)){
 					break;
@@ -357,8 +359,8 @@ tttApp.controller('TTTController', function($scope, $firebase){
 
 						// Use coordinates stored in diagsToCheck as indexes for dataCube
 						var index = diagsToCheck[i][j];
-						if ($scope.game.board[index[0]][index[1]][index[2]]){
-							winCondition += $scope.game.board[index[0]][index[1]][index[2]].charCodeAt(0);
+						if ($scope.game.board[index[0]][index[1]][index[2]].cell){
+							winCondition += $scope.game.board[index[0]][index[1]][index[2]].cell.charCodeAt(0);
 						}
 						playerHasWon(winCondition);
 					}
@@ -423,7 +425,10 @@ tttApp.controller('TTTController', function($scope, $firebase){
 		for (var i = 0; i < $scope.game.board.length; i++){
 			for (var j = 0; j < $scope.game.board[i].length; j++){
 				for (var k = 0; k < $scope.game.board[i][j].length; k++){
-					$scope.game.board[i][j][k] = " ";
+					$scope.game.board[i][j][k] = {
+						cell: " ",
+						bg: " "
+					};
 				}
 			}
 		}
@@ -461,17 +466,18 @@ to do:
 		have player execute turn
 			update board, player score
 
-
-possibilty to change square background color - 
-	create property of background image / color for each square
-	on play, update background image of object
-	update background image on all corresponding faces
-
 potential add-ons:
 	allow player to select their background image
 
-
-TO DO
-	Player appears to not be switching (player 2)
+alert
+	-when other player's turn
+	-
 */
+
+/* Locking out a face
+	Prevent clicking on locked out faces (remove ng-click)
+	Prevent win checking for side that has been locked out
+	Change color of cube face to match won side
+	
+	*/
 

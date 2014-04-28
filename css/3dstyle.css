@@ -1,45 +1,118 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
 body{
 	font-family: monospace;
 	text-shadow: 4px 4px #000;
-	font-size: 30px;
-	background-color: #140702;
+	font-size: 25px;
+	background-color: black;
 /*	background-image: url('../img/diamond.png');*/
 	background-image: url('http://www.transparenttextures.com/patterns/axiom-pattern.png');
 	color: white;
 }
 
+h1 {
+	position: fixed;
+	top: 0;
+	left: 20px;
+	font-size: 40px;
+	font-weight: normal;
+}
+
 #cube-wrap {
 	-webkit-perspective: 1000px;
-/*	-webkit-perspective-origin: 50% 200px;*/
-	margin: 100px 0 0 200px;
-
+	margin: 250px 0 0 30%;
 	-webkit-transition: transform 2s; /* For Safari 3.1 to 6.0 */
 	transition: transform 2s;
+	width: 600px;
 }
 
 #cube {
 	position: relative;
 	width: 600px;
 	-webkit-transform-style: preserve-3d;
-
-	 -webkit-animation-name: spincube;
+	-webkit-animation-name: spincube;
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-duration: 15s;
-
-  -webkit-transform-origin: 10% 40% 0;
+  -webkit-transform-origin: 20% 20% 0;
 }
 
-@-webkit-keyframes spincube {
-  from,to  {                                                    }
-  16%      { -webkit-transform: rotateY(-90deg);                }
-  33%      { -webkit-transform: rotateY(-90deg) rotateZ(90deg); }
-  50%      { -webkit-transform: rotateY(-180deg) rotateZ(90deg); }
-  66%      { -webkit-transform: rotateY(90deg) rotateX(90deg);  }
-  83%      { -webkit-transform: rotateX(90deg);                 }
+.waiting-message {
+	font-size: 30px;
+	color: #f00f75;
+	text-align: center;
+	margin-top: 300px;
+	-webkit-animation-name: waiting-message-zoom;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 5s;
 }
 
+.player-name{
+	text-decoration: underline;
+}
 
+.player-message {
+	height: 200px;
+	font-size: 25x;
+	color: #f00f75;
+	-webkit-animation-name: player-message-zoom;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 5s;
+}
+
+#scores {
+}
+
+.little {
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	color: lime;
+}
+
+dl {
+	float: left;
+	padding: 10px 30px 10px 10px;
+}
+
+#scores {
+	color: white;
+}
+button {
+	background-color: black;
+	border-radius: 15px;
+	border-width: 1px;
+	font-size: 22px;
+	padding: 4px 10px;
+	margin: 5px 5px;
+	color: gray;
+	float: left;
+}
+button:hover {
+	color: lime;
+}
+
+.left-container, .right-container{
+	float: left;
+}
+.left-container{
+	width: 70%;
+}
+.right-container {
+	padding: 20px 20px 0 0;
+	min-width: 200px;
+	width: 25%;
+}
+
+.right-container div {
+	margin: 20px 0;
+}
+
+/* Cube shit */
 .face {
 	color: lime;
 	position: absolute;
@@ -65,38 +138,99 @@ body{
 
 .face-3 /* back */{
 	-webkit-transform: translateZ(-150px) rotateY(180deg);
-/*	background: blue;*/
 }
 .face-1 /* right*/{
 	-webkit-transform: rotateY(-270deg) translateX(150px);
 	-webkit-transform-origin: top right;
-/*	background: green;*/
 }
 .face-0 /* left */{
 	-webkit-transform: rotateY(270deg) translateX(-150px);
 	-webkit-transform-origin: center left;
-/*	background: yellow;*/
 }
 .face-4 /* top */{
 	-webkit-transform: rotateX(-90deg) translateY(-150px);
 	-webkit-transform-origin: top center;
-/*	background: orange;*/
 }
 .face-5 /* bottom */{
 	-webkit-transform: rotateX(90deg) translateY(150px);
 	-webkit-transform-origin: bottom center;
-/*	background: red;*/
 }
-
 .face-2 /* front */{
 	-webkit-transform: translateZ(150px);
-/*	background: purple;*/
 }
 
-#scores {
-	padding-top: 400px;
+/* Animations */
+/* Cube animation */
+@-webkit-keyframes spincube {
+  from,to  {                                                    }
+  16%      { -webkit-transform: rotateY(-90deg);                }
+  33%      { -webkit-transform: rotateY(-90deg) rotateZ(45deg); }
+  50%      { -webkit-transform: rotateY(-180deg) rotateZ(135deg); }
+  66%      { -webkit-transform: rotateY(90deg) rotateX(90deg);  }
+  83%      { -webkit-transform: rotateX(90deg);                 }
+}
+@-moz-keyframes spincube {
+  from,to  {                                                    }
+  16%      { -webkit-transform: rotateY(-90deg);                }
+  33%      { -webkit-transform: rotateY(-90deg) rotateZ(90deg); }
+  50%      { -webkit-transform: rotateY(-180deg) rotateZ(90deg); }
+  66%      { -webkit-transform: rotateY(90deg) rotateX(90deg);  }
+  83%      { -webkit-transform: rotateX(90deg);                 }
+}
+@-o-keyframes spincube {
+  from,to  {                                                    }
+  16%      { -webkit-transform: rotateY(-90deg);                }
+  33%      { -webkit-transform: rotateY(-90deg) rotateZ(90deg); }
+  50%      { -webkit-transform: rotateY(-180deg) rotateZ(90deg); }
+  66%      { -webkit-transform: rotateY(90deg) rotateX(90deg);  }
+  83%      { -webkit-transform: rotateX(90deg);                 }
+}
+@keyframes spincube {
+  from,to  {                                                    }
+  16%      { -webkit-transform: rotateY(-90deg);                }
+  33%      { -webkit-transform: rotateY(-90deg) rotateZ(90deg); }
+  50%      { -webkit-transform: rotateY(-180deg) rotateZ(90deg); }
+  66%      { -webkit-transform: rotateY(90deg) rotateX(90deg);  }
+  83%      { -webkit-transform: rotateX(90deg);                 }
 }
 
+/* Waiting message animation */
+@-webkit-keyframes waiting-message-zoom {
+  0%,100%   { color: rgba(255,0,102,.2); }
+  30% { color: rgba(255,0,102,.9); }
+}
+@-moz-keyframes waiting-message-zoom {
+  0%,100%   { color: rgba(255,0,102,.2); }
+  30% { color: rgba(255,0,102,.9); }
+}
+@-o-keyframes waiting-message-zoom {
+  0%,100%   { color: rgba(255,0,102,.2); }
+  30% { color: rgba(255,0,102,.9); }
+}
+@keyframes waiting-message-zoom {
+  0%,100%   { color: rgba(255,0,102,.2); }
+  30% { color: rgba(255,0,102,.9); }
+}
+
+/* Player message animation */
+@-webkit-keyframes player-message-zoom {
+  0%,100%   { color: rgba(0,255,51,.2); }
+  30% { color: rgba(0,255,51,.9); }
+}
+@-moz-keyframes player-message-zoom {
+  0%,100%   { color: rgba(0,255,51,.2); }
+  30% { color: rgba(0,255,51,.9); }
+}
+@-o-keyframes player-message-zoom {
+  0%,100%   { color: rgba(0,255,51,.2); }
+  30% { color: rgba(0,255,51,.9); }
+}
+@keyframes player-message-zoom {
+  0%,100%   { color: rgba(0,255,51,.2); }
+  30% { color: rgba(0,255,51,.9); }
+}
+
+/*
 #controls {
 	position: absolute;
 	top: 10px;
@@ -113,44 +247,4 @@ body{
 	font-size: 14px;
 	text-align: center;
 }
-
-.little {
-	font-size: 12px;
-	margin: 0;
-	padding: 0;
-	color: lime;
-}
-
-dl {
-	float: left;
-	padding: 10px 30px 10px 10px;
-}
-
-#scores {
-	text-shadow: 2px 2px magenta;
-	color: lime;
-}
-button {
-	background-color: black;
-	border-radius: 15px;
-}
-
-.hidden {
-	visibility: hidden;
-}
-
-.waiting-message {
-	font-size: 40px;
-	color: red;
-	text-align: center;
-	margin-top: 300px;
-
-	-webkit-transform-style: preserve-3d;
-
-	-webkit-animation-name: spincube;
-  -webkit-animation-timing-function: ease-in-out;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-duration: 15s;
-
-  -webkit-transform-origin: 10% 40% 0;
-}
+*/
