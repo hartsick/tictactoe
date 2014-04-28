@@ -1,7 +1,8 @@
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+.ng-cloak, .x-ng-cloak,
+.ng-hide {
     display: none !important;
 }
-
 body{
 	font-family: monospace;
 	text-shadow: 4px 4px #000;
@@ -77,6 +78,9 @@ h1 {
 dl {
 	float: left;
 	padding: 10px 30px 10px 10px;
+}
+dd {
+	font-size: 22px;
 }
 
 #scores {

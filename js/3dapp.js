@@ -1,6 +1,6 @@
 // Dependency injection - firebase and $scope
 var tttApp = angular.module('tttApp', ["firebase"]);
-tttApp.controller('TTTController', function($scope, $firebase){
+tttApp.controller('TTTController', function($scope, $timeout, $firebase){
 
   var tttRef = new Firebase("https://tcubed.firebaseio.com/games");
 
@@ -236,6 +236,15 @@ tttApp.controller('TTTController', function($scope, $firebase){
 				// Do rest of turn
 				$scope.checkForWin(x,y,z);
 				$scope.switchPlayer();
+			}
+			else {
+				// Flash red!
+				var bg = $scope.game.board[x][y][z].bg;
+				console.log("bg1: " + bg);
+				$scope.game.board[x][y][z].bg = 'rgba(239,16,59,.5)';
+				$timeout(function(){ 
+					$scope.game.board[x][y][z].bg = bg;
+				}, 100);
 			}
 		}
 

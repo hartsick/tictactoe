@@ -32,7 +32,7 @@
 		<div class="left-container">
 			<h1>t_cubed</h1>
 			<!-- Cube wrapper -->
-			<div id="cube-wrap" x-ng-cloak x-ng-show="!game.waiting">
+			<div id="cube-wrap" x-ng-show="!game.waiting;" x-ng-cloak>
 				<div id="cube">
 						<!-- front -->
 						<div class="face face-2">
@@ -81,7 +81,7 @@
 			</div>
 		</div>
 
-		<div class="right-container" x-ng-cloak x-ng-show="!game.waiting">
+		<div class="right-container" x-ng-show="!game.waiting;" x-ng-cloak>
 			<!-- In-turn player message -->
 			<div class="player-name">
 				{{player.name}}
@@ -89,6 +89,9 @@
 			<div class="player-message">
 				<p x-ng-show="!(player.name == game.currentPlayer.name) && !game.waiting">
 				Waiting for {{game.currentPlayer.name}} to make a move...
+				</p>
+				<p x-ng-show="(player.name == game.currentPlayer.name) && !game.waiting" x-ng-cloak>
+				Your turn!
 				</p>
 			</div>
 
